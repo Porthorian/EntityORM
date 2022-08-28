@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Porthorian\EntityOrm\Tests;
 
 use PHPUnit\Framework\TestCase;
-
 use Porthorian\EntityOrm\Tests\EntityChild;
 use Porthorian\EntityOrm\Model\ModelInterface;
 use Porthorian\EntityOrm\Tests\ModelChild;
