@@ -20,6 +20,7 @@ interface EntityInterface
 	 * @param $params - These are the fields that will be pulled from the model
 	 * Ex ['registration_time', 'date_of_birth']
 	 * @throws InvalidArgumentException - If the column does not exist inside the model.
+	 * @throws EntityException
 	 * @return bool
 	*/
 	public function update(array $params = []) : bool;
