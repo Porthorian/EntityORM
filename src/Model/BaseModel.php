@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Porthorian\EntityOrm\Model;
 
-use Porthorian\Util\ClassMetadata;
+use Porthorian\Utility\Metadata\ClassMetadata;
 use Porthorian\Utility\Json\JsonWrapper;
 
 abstract class BaseModel implements BaseModelInterface

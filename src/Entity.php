@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Porthorian\EntityOrm;
 
-use Porthorian\EntityOrm\Util\ClassMetadata;
 use Porthorian\EntityOrm\Model\ModelInterface;
 use Porthorian\Utility\Cache\CacheTrait;
+use Porthorian\Utility\Metadata\ClassMetadata;
 
 abstract class Entity implements EntityInterface
 {
@@ -133,6 +133,5 @@ abstract class Entity implements EntityInterface
 	private function intializeMetadata(ModelInterface $model) : void
 	{
 		$this->metadata = new ClassMetadata($model);
-		$this->metadata->setEntity($this);
 	}
 }
