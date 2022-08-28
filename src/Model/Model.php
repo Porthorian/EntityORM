@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Porthorian\EntityOrm\Model;
 
+use Porthorian\EntityOrm\EntityInterface;
 use Porthorian\EntityOrm\EntityException;
 
 abstract class Model extends BaseModel implements ModelInterface

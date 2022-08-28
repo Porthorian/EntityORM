@@ -10,7 +10,14 @@ use Porthorian\Utility\Cache\CacheTrait;
 
 abstract class Entity implements EntityInterface
 {
-	use CacheTrait;
+	use CacheTrait {
+		setCacheItem as protected;
+		setCacheItemIfNotSet as protected;
+		getCacheItem as protected;
+		hasCacheItem as protected;
+		deleteCacheItem as protected;
+		resetCache as protected;
+	}
 
 	/**
 	 * Houses the model object based on the model path
@@ -46,7 +53,7 @@ abstract class Entity implements EntityInterface
 
 	public function setModel(ModelInterface $model) : void
 	{
-		if (get_class($this->getModel()) != get_class($model))
+		if (!isset($this->model) || get_class($this->getModel()) != get_class($model))
 		{
 			$this->intializeMetadata($model);
 		}
@@ -88,18 +95,18 @@ abstract class Entity implements EntityInterface
 		return $key;
 	}
 
-	////
-	// Protected Routines
-	////
-
 	/**
 	 * Determine if we wanna look to see if the entity is cached in our trait.
 	 * @return void
 	 */
-	final protected function setEntityCache(bool $cachable) : void
+	final public function setEntityCache(bool $cachable) : void
 	{
 		$this->entity_cache = $cachable;
 	}
+
+	////
+	// Protected Routines
+	////
 
 	/**
 	* Check to see if the entry should be used in the trait cache first?
