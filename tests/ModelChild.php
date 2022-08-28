@@ -12,6 +12,7 @@ class ModelChild extends Model
 
 	public function reset() : void
 	{
+		$this->test = 'hello';
 		return;
 	}
 

@@ -58,4 +58,16 @@ class EntityTest extends TestCase
 
 		$this->assertEquals('hello', $entity->find(0)->test);
 	}
+
+	public function testResetModel()
+	{
+		$model = new ModelChild();
+		$model->test = 'new variable';
+		$entity = (new EntityChild())->withModel($model);
+		$this->assertEquals('new variable', $entity->getModel()->test);
+
+		$entity->delete();
+
+		$this->assertEquals('hello', $entity->getModel()->test);
+	}
 }
