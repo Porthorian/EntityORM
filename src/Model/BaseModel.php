@@ -58,7 +58,15 @@ abstract class BaseModel implements BaseModelInterface
 		$reflection = $metadata->getReflection();
 		foreach ($record as $column => $value)
 		{
-			$property = $reflection->getProperty($column);
+			try
+			{
+				$property = $reflection->getProperty($column);
+			}
+			catch (ReflectionException $e)
+			{
+				throw new ModelException('Property: '.$column.' has a problem and caused a reflection exception.', $e);
+			}
+
 			$property->setAccessible(true);
 			$property->setValue($this, $value);
 			$property->setAccessible(false);
