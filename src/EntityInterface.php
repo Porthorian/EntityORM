@@ -64,6 +64,16 @@ interface EntityInterface
 	public function getModel() : ModelInterface;
 
 	/**
+	 * Set the model on the instance of this entity.
+	 */
+	public function setModel(ModelInterface $model) : void;
+
+	/**
+	 * Set and return a new object with the new model set.
+	 */
+	public function withModel(ModelInterface $model) : self;
+
+	/**
 	 * Get a Cacheable string that can be used as a unique identifier to the entity model.
 	 * Ex: your_schema:your_table:your_primary_key_column:your_primary_key_value
 	 * @param $pk_value = Primary Key Value
