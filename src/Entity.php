@@ -39,18 +39,6 @@ abstract class Entity implements EntityInterface
 	// Public Routines
 	////
 
-	public function __construct(?ModelInterface $model = null)
-	{
-		if ($model === null)
-		{
-			$path = $this->getModelPath();
-			$model = new $path;
-		}
-
-		$this->intializeMetadata($model);
-		$this->setModel($model);
-	}
-
 	public function getModel() : ModelInterface
 	{
 		return $this->model;
