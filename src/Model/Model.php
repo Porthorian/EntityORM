@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Porthorian\EntityOrm\Model;
 
-use InvalidArgumentException;
 use Porthorian\EntityOrm\EntityException;
 
 abstract class Model extends BaseModel implements ModelInterface
