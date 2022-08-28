@@ -48,7 +48,7 @@ interface EntityInterface
 	public function getCollectionTable() : string;
 
 	/**
-	 * Primary key for the database table
+	 * Primary key column name for the database table
 	 */
 	public function getCollectionPrimaryKey() : string;
 
@@ -62,4 +62,12 @@ interface EntityInterface
 	 * @return ModelInterface
 	 */
 	public function getModel() : ModelInterface;
+
+	/**
+	 * Get a Cacheable string that can be used as a unique identifier to the entity model.
+	 * Ex: your_schema:your_table:your_primary_key_column:your_primary_key_value
+	 * @param $pk_value = Primary Key Value
+	 * @return string
+	 */
+	public function getCacheKey(string|int $pk_value = 0, string $pk_name = '') : string;
 }
