@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Porthorian\EntityOrm;
+namespace Porthorian\EntityOrm\Model;
 
-use Exception;
+use Porthorian\EntityOrm\EntityException;
 use Throwable;
 
-class ModelException extends Exception
+class ModelException extends EntityException
 {
 	public function __construct(string $message, ?Throwable $previous = null)
 	{
-		parent::__construct($message, 136, $previous);
+		parent::__construct($message, $previous);
 	}
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Porthorian\EntityOrm\Model;
 
+use ReflectionException;
 use Porthorian\Utility\Metadata\ClassMetadata;
 use Porthorian\Utility\Json\JsonWrapper;
 

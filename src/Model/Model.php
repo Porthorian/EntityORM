@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Porthorian\EntityOrm\Model;
 
 use Porthorian\EntityOrm\EntityInterface;
-use Porthorian\EntityOrm\EntityException;
 
 abstract class Model extends BaseModel implements ModelInterface
 {
@@ -30,7 +29,7 @@ abstract class Model extends BaseModel implements ModelInterface
 		$entity = $this->getEntityPath();
 		if (!class_exists($entity))
 		{
-			throw new EntityException('Unable to create entity as the class does not exist. Class: '.$entity);
+			throw new ModelException('Unable to create entity as the class does not exist. Class: '.$entity);
 		}
 
 		$object = new $entity();
