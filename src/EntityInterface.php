@@ -81,4 +81,9 @@ interface EntityInterface
 	 * @return string
 	 */
 	public function getCacheKey(string|int $pk_value = 0, string $pk_name = '') : string;
+
+	/**
+	 * Determine whether an entity should use cache key to get it from a cache.
+	 */
+	public function setEntityCache(bool $cachable) : void;
 }
