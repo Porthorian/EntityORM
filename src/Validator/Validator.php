@@ -82,7 +82,7 @@ abstract class Validator
 		return $this->getRules()[$validator] ?? [];
 	}
 
-	final public function getModel() : ModelInterface
+	final public function getModel() : BaseModelInterface
 	{
 		return $this->model;
 	}

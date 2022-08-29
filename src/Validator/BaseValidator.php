@@ -9,7 +9,9 @@ use Porthorian\Utility\String\StringUtility;
 class BaseValidator extends Validator
 {
 	/**
-	 * @return true on length greater than min|false on failure
+	 * Enforce a minimum length to a string. If its less than the minimum will return false.
+	 * Otherwise true.
+	 * @return bool
 	 */
 	public function minLength(string $value, int $min) : bool
 	{
@@ -22,7 +24,9 @@ class BaseValidator extends Validator
 	}
 
 	/**
-	 * @return true on length less than max|false on failure
+	 * Enforce a maximum length to a string. If its greater than max return false.
+	 * Otherwise true.
+	 * @return bool
 	 */
 	public function maxLength(string $value, int $max) : bool
 	{
