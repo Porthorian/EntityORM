@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b7760c9064d10b2956ff44dc86a95fac",
+    "content-hash": "0444e59bb8894976827385f98d6ff161",
     "packages": [
         {
             "name": "porthorian/utility",
-            "version": "v0.0.4",
+            "version": "v0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Porthorian/utility.git",
-                "reference": "a79de566d1806d9ad073045573cca25c18eee59a"
+                "reference": "bf9c0c9feff39b087480e7908901af677f5eb54d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Porthorian/utility/zipball/a79de566d1806d9ad073045573cca25c18eee59a",
-                "reference": "a79de566d1806d9ad073045573cca25c18eee59a",
+                "url": "https://api.github.com/repos/Porthorian/utility/zipball/bf9c0c9feff39b087480e7908901af677f5eb54d",
+                "reference": "bf9c0c9feff39b087480e7908901af677f5eb54d",
                 "shasum": ""
             },
             "require": {
@@ -48,9 +48,9 @@
             "description": "Various php utility classes that are useful.",
             "support": {
                 "issues": "https://github.com/Porthorian/utility/issues",
-                "source": "https://github.com/Porthorian/utility/tree/v0.0.4"
+                "source": "https://github.com/Porthorian/utility/tree/v0.1.0"
             },
-            "time": "2022-08-29T01:07:20+00:00"
+            "time": "2022-08-29T05:00:53+00:00"
         }
     ],
     "packages-dev": [
