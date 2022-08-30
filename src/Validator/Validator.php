@@ -87,6 +87,16 @@ abstract class Validator
 		return $this->model;
 	}
 
+	final public function setStopOnFirstRuleFail(bool $flag) : void
+	{
+		$this->stop_on_first_rule_fail = $flag;
+	}
+
+	final public function setStopOnFirstValidatorFail(bool $flag) : void
+	{
+		$this->stop_on_first_validator_fail = $flag;
+	}
+
 	/**
 	 * Validate the model values based on the validators and the rule column's specified
 	 * @return bool true on succes or false on failure
@@ -138,8 +148,8 @@ abstract class Validator
 		if ($error_fail === true && $failure === false)
 		{
 			$this->addError('Unknown validation error has occurred.');
-			trigger_error('Validation method returned false without giving an error. Class:'.get_class($this), E_USER_WARNING);
-			return false;
+			trigger_error('Validation method returned false without giving an error. Class:'.get_class($this), E_USER_NOTICE);
+			return false; // @codeCoverageIgnore
 		}
 
 		return $error_fail;

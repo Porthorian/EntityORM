@@ -37,4 +37,15 @@ class BaseValidator extends Validator
 		}
 		return true;
 	}
+
+	public function betweenLengths(string $value, int $min, int $max) : bool
+	{
+		$length = strlen($value);
+		if (!($length > $min && $length < $max))
+		{
+			$this->addError(StringUtility::humanReadable($this->getCurrentEntityProperty()) . ' is not between the min length of '.$min.' and the max length of '.$max);
+			return false;
+		}
+		return true;
+	}
 }
