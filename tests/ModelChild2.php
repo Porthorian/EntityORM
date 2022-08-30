@@ -9,6 +9,26 @@ class ModelChild2 extends ModelChild
 	protected string $property1 = 'hello';
 	protected string $property2 = 'public';
 
+	public function getProperty1() : string
+	{
+		return $this->property1;
+	}
+
+	public function setProperty1(string $value) : void
+	{
+		$this->property1 = $value;
+	}
+
+	public function getProperty2() : string
+	{
+		return $this->property2;
+	}
+
+	public function setProperty2(string $value) : void
+	{
+		$this->property2 = $value;
+	}
+
 	public function toArray() : array
 	{
 		return [

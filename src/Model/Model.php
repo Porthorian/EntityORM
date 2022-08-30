@@ -12,7 +12,6 @@ abstract class Model extends BaseModel implements ModelInterface
 	// Abstract Routines
 	////
 
-	abstract public function reset() : void;
 	abstract public function toArray() : array;
 	abstract public function toPublicArray() : array;
 

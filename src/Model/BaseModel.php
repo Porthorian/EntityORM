@@ -12,11 +12,12 @@ abstract class BaseModel implements BaseModelInterface
 {
 	private bool $initialized_flag = false;
 
+	private ClassMetadata $metadata;
+
 	////
 	// Abstract Routines
 	////
 
-	abstract public function reset() : void;
 	abstract public function toArray() : array;
 	abstract public function toPublicArray() : array;
 
@@ -26,18 +27,41 @@ abstract class BaseModel implements BaseModelInterface
 
 	public function __construct()
 	{
+		$this->metadata = new ClassMetadata($this);
 		$this->reset();
 	}
 
-	final public function toJSON() : string
+	public function toJSON() : string
 	{
 		return JsonWrapper::json($this->toArray());
 	}
 
-	final public function toPublicJSON() : string
+	public function toPublicJSON() : string
 	{
 		return JsonWrapper::json($this->toPublicArray());
 	}
+
+	public function reset() : void
+	{
+		foreach ([$this->metadata->getPublicProperties(), $this->metadata->getProtectedProperties()] as $properties)
+		{
+			foreach ($properties as $property)
+			{
+				$name = $property->getName();
+				if ($property->hasDefaultValue())
+				{
+					$this->$name = $property->getDefaultValue();
+					continue;
+				}
+
+				unset($this->$name);
+			}
+		}
+	}
+
+	////
+	// Final Public Routines
+	////
 
 	final public function isInitialized() : bool
 	{
@@ -54,9 +78,7 @@ abstract class BaseModel implements BaseModelInterface
 	*/
 	final public function setModelProperties(array $record) : void
 	{
-		$metadata = new ClassMetadata($this);
-
-		$reflection = $metadata->getReflection();
+		$reflection = $this->metadata->getReflection();
 		foreach ($record as $column => $value)
 		{
 			try

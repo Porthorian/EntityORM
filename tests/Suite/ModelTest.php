@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Porthorian\EntityOrm\Tests\Suite;
 
+use ReflectionClass;
 use PHPUnit\Framework\TestCase;
 use Porthorian\EntityOrm\EntityInterface;
 use Porthorian\EntityOrm\Model\ModelException;
@@ -77,5 +78,26 @@ class ModelTest extends TestCase
 		$this->expectException(ModelException::class);
 		$child = new ModelChild2();
 		$child->setModelProperties(['Unknown' => 'new_world']);
+	}
+
+	public function testReset()
+	{
+		$child = new ModelChild2();
+		$expected_string = 'new_hello';
+		$expected_string_2 = 'public_hello';
+		$child->setProperty1($expected_string);
+		$child->setProperty2($expected_string_2);
+
+		$child->runtime_prop = 'hello';
+		$this->assertEquals('hello', $child->runtime_prop);
+		$this->assertEquals($expected_string, $child->getProperty1());
+		$this->assertEquals($expected_string_2, $child->getProperty2());
+
+		$child->reset();
+
+		$reflection = new ReflectionClass($child);
+		$this->assertFalse($reflection->hasProperty('runtime_prop'));
+		$this->assertNotEquals($expected_string, $child->getProperty1());
+		$this->assertNotEquals($expected_string_2, $child->getProperty2());
 	}
 }

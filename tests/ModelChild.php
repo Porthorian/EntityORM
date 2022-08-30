@@ -8,13 +8,8 @@ use Porthorian\EntityOrm\Model\Model;
 
 class ModelChild extends Model
 {
-	public $test = 'hello';
-
-	public function reset() : void
-	{
-		$this->test = 'hello';
-		return;
-	}
+	public string $uninitialized;
+	public string $test = 'hello';
 
 	public function toArray() : array
 	{
