@@ -19,15 +19,15 @@ class EntityChild extends Entity
 		return $this->getModel();
 	}
 
-	public function update(array $params = []) : bool
+	public function update(array $params = []) : void
 	{
-		return true;
+		return;
 	}
 
-	public function delete() : bool
+	public function delete() : void
 	{
 		$this->resetModel();
-		return true;
+		return;
 	}
 
 	public function find(string|int $pk_value) : ModelInterface

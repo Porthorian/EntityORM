@@ -21,16 +21,16 @@ interface EntityInterface
 	 * Ex ['registration_time', 'date_of_birth']
 	 * @throws InvalidArgumentException - If the column does not exist inside the model.
 	 * @throws EntityException
-	 * @return bool
-	*/
-	public function update(array $params = []) : bool;
+	 * @return void
+	 */
+	public function update(array $params = []) : void;
 
 	/**
 	 * Delete the entity based on the primary key of the model.
 	 * @throws EntityException if the model object is not initialized
-	 * @return bool
+	 * @return void
 	 */
-	public function delete() : bool;
+	public function delete() : void;
 
 	/**
 	 * @param pk_value - Primary key value

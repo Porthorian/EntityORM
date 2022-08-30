@@ -34,8 +34,8 @@ abstract class Entity implements EntityInterface
 	// Abstract Routines
 	////
 	abstract public function store() : ModelInterface;
-	abstract public function update(array $params = []) : bool;
-	abstract public function delete() : bool;
+	abstract public function update(array $params = []) : void;
+	abstract public function delete() : void;
 	abstract public function find(string|int $pk_value) : ModelInterface;
 	abstract public function getCollectionName() : string;
 	abstract public function getCollectionTable() : string;
