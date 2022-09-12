@@ -107,9 +107,5 @@ class ModelTest extends TestCase
 		$to_array = new NoToArrayModelChild();
 
 		$this->assertEquals(['test_world' => 'world', 'test' => 'hello'], $to_array->toArray());
-
-		$metadata = $to_array->getMetadata();
-		$this->assertCount(1, $metadata->getPublicProperties());
-		$this->assertCount(1, $metadata->getProtectedProperties());
 	}
 }

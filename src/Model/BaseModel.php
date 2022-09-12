@@ -18,6 +18,7 @@ abstract class BaseModel implements BaseModelInterface
 	// Abstract Routines
 	////
 
+	abstract public function toArray() : array;
 	abstract public function toPublicArray() : array;
 
 	////
@@ -59,20 +60,6 @@ abstract class BaseModel implements BaseModelInterface
 		}
 	}
 
-	public function toArray() : array
-	{
-		$output = [];
-		foreach ([$this->metadata->getPublicProperties(), $this->metadata->getProtectedProperties()] as $properties)
-		{
-			foreach ($properties as $property)
-			{
-				$name = $property->getName();
-				$output[$name] = $this->$name;
-			}
-		}
-		return $output;
-	}
-
 	////
 	// Final Public Routines
 	////
@@ -110,10 +97,36 @@ abstract class BaseModel implements BaseModelInterface
 		}
 	}
 
+	////
+	// Final protected methods
+	////
+
+	final protected function toProtectedPropsArray() : array
+	{
+		$output = [];
+		foreach ($this->metadata->getProtectedProperties() as $property)
+		{
+			$name = $property->getName();
+			$output[$name] = $this->$name;
+		}
+		return $output;
+	}
+
+	final protected function toPublicPropsArray() : array
+	{
+		$output = [];
+		foreach ($this->metadata->getPublicProperties() as $property)
+		{
+			$name = $property->getName();
+			$output[$name] = $this->$name;
+		}
+		return $output;
+	}
+
 	/**
 	 * This isn't apart of the interface as this is a specific implementation detail if it is needed.
 	 */
-	final public function getMetadata() : ClassMetadata
+	final protected function getMetadata() : ClassMetadata
 	{
 		return $this->metadata;
 	}

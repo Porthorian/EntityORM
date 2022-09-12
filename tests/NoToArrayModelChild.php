@@ -11,6 +11,11 @@ class NoToArrayModelChild extends Model
 	public string $test_world = 'world';
 	protected string $test = 'hello';
 
+	public function toArray() : array
+	{
+		return $this->toProtectedPropsArray() + $this->toPublicPropsArray();
+	}
+
 	public function toPublicArray() : array
 	{
 		return [];
