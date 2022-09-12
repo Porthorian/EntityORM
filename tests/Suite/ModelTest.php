@@ -11,6 +11,7 @@ use Porthorian\EntityOrm\Model\ModelException;
 use Porthorian\EntityOrm\Tests\EntityChild;
 use Porthorian\EntityOrm\Tests\ModelChild;
 use Porthorian\EntityOrm\Tests\ModelChild2;
+use Porthorian\EntityOrm\Tests\NoToArrayModelChild;
 
 class ModelTest extends TestCase
 {
@@ -99,5 +100,16 @@ class ModelTest extends TestCase
 		$this->assertFalse($reflection->hasProperty('runtime_prop'));
 		$this->assertNotEquals($expected_string, $child->getProperty1());
 		$this->assertNotEquals($expected_string_2, $child->getProperty2());
+	}
+
+	public function testOriginalToArray()
+	{
+		$to_array = new NoToArrayModelChild();
+
+		$this->assertEquals(['test_world' => 'world', 'test' => 'hello'], $to_array->toArray());
+
+		$metadata = $to_array->getMetadata();
+		$this->assertCount(1, $metadata->getPublicProperties());
+		$this->assertCount(1, $metadata->getProtectedProperties());
 	}
 }

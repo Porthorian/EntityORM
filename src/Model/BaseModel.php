@@ -18,7 +18,6 @@ abstract class BaseModel implements BaseModelInterface
 	// Abstract Routines
 	////
 
-	abstract public function toArray() : array;
 	abstract public function toPublicArray() : array;
 
 	////
@@ -48,6 +47,7 @@ abstract class BaseModel implements BaseModelInterface
 			foreach ($properties as $property)
 			{
 				$name = $property->getName();
+
 				if ($property->hasDefaultValue())
 				{
 					$this->$name = $property->getDefaultValue();
@@ -57,6 +57,20 @@ abstract class BaseModel implements BaseModelInterface
 				unset($this->$name);
 			}
 		}
+	}
+
+	public function toArray() : array
+	{
+		$output = [];
+		foreach ([$this->metadata->getPublicProperties(), $this->metadata->getProtectedProperties()] as $properties)
+		{
+			foreach ($properties as $property)
+			{
+				$name = $property->getName();
+				$output[$name] = $this->$name;
+			}
+		}
+		return $output;
 	}
 
 	////
@@ -74,8 +88,8 @@ abstract class BaseModel implements BaseModelInterface
 	}
 
 	/**
-	* Set properties for the object based on the record given.
-	*/
+	 * Set properties for the object based on the record given.
+	 */
 	final public function setModelProperties(array $record) : void
 	{
 		$reflection = $this->metadata->getReflection();
@@ -94,5 +108,13 @@ abstract class BaseModel implements BaseModelInterface
 			$property->setValue($this, $value);
 			$property->setAccessible(false);
 		}
+	}
+
+	/**
+	 * This isn't apart of the interface as this is a specific implementation detail if it is needed.
+	 */
+	final public function getMetadata() : ClassMetadata
+	{
+		return $this->metadata;
 	}
 }
