@@ -91,7 +91,26 @@ abstract class BaseModel implements BaseModelInterface
 				throw new ModelException('Property: '.$column.' has a problem and caused a reflection exception.', $e);
 			}
 
+			if ($property->isPrivate())
+			{
+				throw new ModelException('Property: '.$property->getName().' is a private property and can not be set via this method.');
+			}
+
+			/**
+			 * PHP Versions 8.0 and below will throw an error if checking if its initialized on protected props
+			 * Even though they are a child of this class. Its dumb.
+			 */
+			if ($property->isProtected() && version_compare(PHP_VERSION, '8.1', '<'))
+			{
+				$property->setAccessible(true);
+			}
+
 			$property->setValue($this, $value);
+
+			if ($property->isProtected() && version_compare(PHP_VERSION, '8.1', '<'))
+			{
+				$property->setAccessible(false);
+			}
 		}
 	}
 
