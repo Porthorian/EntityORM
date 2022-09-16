@@ -91,9 +91,7 @@ abstract class BaseModel implements BaseModelInterface
 				throw new ModelException('Property: '.$column.' has a problem and caused a reflection exception.', $e);
 			}
 
-			$property->setAccessible(true);
 			$property->setValue($this, $value);
-			$property->setAccessible(false);
 		}
 	}
 
@@ -106,6 +104,11 @@ abstract class BaseModel implements BaseModelInterface
 		$output = [];
 		foreach ($this->metadata->getProtectedProperties() as $property)
 		{
+			if (!$property->isInitialized($this))
+			{
+				continue;
+			}
+
 			$name = $property->getName();
 			$output[$name] = $this->$name;
 		}
@@ -117,6 +120,11 @@ abstract class BaseModel implements BaseModelInterface
 		$output = [];
 		foreach ($this->metadata->getPublicProperties() as $property)
 		{
+			if (!$property->isInitialized($this))
+			{
+				continue;
+			}
+
 			$name = $property->getName();
 			$output[$name] = $this->$name;
 		}

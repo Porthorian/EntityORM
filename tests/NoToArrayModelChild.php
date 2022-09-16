@@ -10,6 +10,8 @@ class NoToArrayModelChild extends Model
 {
 	public string $test_world = 'world';
 	protected string $test = 'hello';
+	public string $unintilized_public;
+	protected string $unintilized_protected;
 
 	public function toArray() : array
 	{
