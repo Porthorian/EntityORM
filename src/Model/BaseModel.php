@@ -123,6 +123,11 @@ abstract class BaseModel implements BaseModelInterface
 		$output = [];
 		foreach ($this->metadata->getProtectedProperties() as $property)
 		{
+			if (version_compare(PHP_VERSION, '8.1', '<'))
+			{
+				$property->setAccessible(true);
+			}
+
 			if (!$property->isInitialized($this))
 			{
 				continue;
