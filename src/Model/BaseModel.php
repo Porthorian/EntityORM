@@ -95,6 +95,16 @@ abstract class BaseModel implements BaseModelInterface
 				throw new ModelException('Property: '.$property->getName().' is a private property and can not be set via this method.');
 			}
 
+			$prop_value = $value;
+			if (version_compare(PHP_VERSION, '8.1', '>='))
+			{
+				$prop_type = $property->getType()->getName();
+				if (enum_exists($prop_type))
+				{
+					$prop_value = $prop_type::from($value);
+				}
+			}
+
 			/**
 			 * PHP Versions 8.0 and below will throw an error if checking if its initialized on protected props
 			 * Even though they are a child of this class. Its dumb.
