@@ -114,7 +114,7 @@ abstract class BaseModel implements BaseModelInterface
 				$property->setAccessible(true);
 			}
 
-			$property->setValue($this, $value);
+			$property->setValue($this, $prop_value);
 
 			if ($property->isProtected() && version_compare(PHP_VERSION, '8.1', '<'))
 			{
