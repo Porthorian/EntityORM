@@ -11,7 +11,10 @@ use Porthorian\EntityOrm\Model\ModelException;
 use Porthorian\EntityOrm\Tests\EntityChild;
 use Porthorian\EntityOrm\Tests\ModelChild;
 use Porthorian\EntityOrm\Tests\ModelChild2;
+use Porthorian\EntityOrm\Tests\ModelChildEnum;
 use Porthorian\EntityOrm\Tests\NoToArrayModelChild;
+use function version_compare;
+use const PHP_VERSION;
 
 class ModelTest extends TestCase
 {
@@ -79,6 +82,30 @@ class ModelTest extends TestCase
 		$this->expectException(ModelException::class);
 		$child = new ModelChild2();
 		$child->setModelProperties(['Unknown' => 'new_world']);
+	}
+
+	public function testSetModelPropertiesPrivate()
+	{
+		$child = new ModelChild2();
+
+		$this->expectException(ModelException::class);
+		$child->setModelProperties(['hello' => 'test world']);
+	}
+
+	public function testSetModelPropertiesEnums()
+	{
+		if (version_compare(PHP_VERSION, '8.1', '<'))
+		{
+			$this->markTestSkipped('Not compatible with php 8.1');
+		}
+
+		$child = new ModelChildEnum();
+		$child->setModelProperties(['test_enum' => 1]);
+
+		$this->assertEquals(['test_enum' => 1], $child->toArray());
+
+		$this->expectException(ModelException::class);
+		$child->setModelProperties(['test_enum' => 5]);
 	}
 
 	public function testReset()

@@ -9,6 +9,8 @@ class ModelChild2 extends ModelChild
 	protected string $property1 = 'hello';
 	protected string $property2 = 'public';
 
+	private string $hello = 'world';
+
 	public function getProperty1() : string
 	{
 		return $this->property1;

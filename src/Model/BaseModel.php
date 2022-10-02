@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Porthorian\EntityOrm\Model;
 
+use TypeError;
 use ReflectionException;
 use Porthorian\Utility\Metadata\ClassMetadata;
 use Porthorian\Utility\Json\JsonWrapper;
@@ -96,29 +97,22 @@ abstract class BaseModel implements BaseModelInterface
 			}
 
 			$prop_value = $value;
+			$prop_type = $property->getType()->getName();
 			if (version_compare(PHP_VERSION, '8.1', '>='))
 			{
-				$prop_type = $property->getType()->getName();
-				if (enum_exists($prop_type))
+				if (!($prop_value instanceof BackedEnum) && enum_exists($prop_type))
 				{
-					$prop_value = $prop_type::from($value);
+					$prop_value = $prop_type::tryfrom($value);
 				}
 			}
 
-			/**
-			 * PHP Versions 8.0 and below will throw an error if checking if its initialized on protected props
-			 * Even though they are a child of this class. Its dumb.
-			 */
-			if ($property->isProtected() && version_compare(PHP_VERSION, '8.1', '<'))
+			try
 			{
-				$property->setAccessible(true);
+				$this->$column = $prop_value;
 			}
-
-			$property->setValue($this, $prop_value);
-
-			if ($property->isProtected() && version_compare(PHP_VERSION, '8.1', '<'))
+			catch (TypeError $e)
 			{
-				$property->setAccessible(false);
+				throw new ModelException('Property: '.$property->getName().' failed to set because of invalid type: '.$prop_type, $e);
 			}
 		}
 	}
