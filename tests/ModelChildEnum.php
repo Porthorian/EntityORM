@@ -33,3 +33,4 @@ class ModelChildEnum extends Model
 		return '\Porthorian\EntityOrm\Tests\EntityChild';
 	}
 }
+
