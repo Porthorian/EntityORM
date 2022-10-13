@@ -11,7 +11,8 @@ abstract class Model extends BaseModel implements ModelInterface
 	////
 	// Abstract Routines
 	////
-
+	
+	abstract public function toArray() : array;
 	abstract public function toPublicArray() : array;
 
 	abstract public function setPrimaryKey(string|int $value) : void;

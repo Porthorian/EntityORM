@@ -139,6 +139,7 @@ abstract class BaseModel implements BaseModelInterface
 			$name = $property->getName();
 			$output[$name] = $this->$name;
 		}
+		ksort($output);
 		return $output;
 	}
 
@@ -155,6 +156,7 @@ abstract class BaseModel implements BaseModelInterface
 			$name = $property->getName();
 			$output[$name] = $this->$name;
 		}
+		ksort($output);
 		return $output;
 	}
 
