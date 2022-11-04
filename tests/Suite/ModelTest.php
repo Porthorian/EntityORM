@@ -8,6 +8,8 @@ use ReflectionClass;
 use PHPUnit\Framework\TestCase;
 use Porthorian\EntityOrm\EntityInterface;
 use Porthorian\EntityOrm\Model\ModelException;
+use Porthorian\EntityOrm\Model\NotExistsException;
+use Porthorian\EntityOrm\Model\TypeException;
 use Porthorian\EntityOrm\Tests\EntityChild;
 use Porthorian\EntityOrm\Tests\ModelChild;
 use Porthorian\EntityOrm\Tests\ModelChild2;
@@ -80,6 +82,7 @@ class ModelTest extends TestCase
 		$this->assertEquals(['property1' => 'new_world', 'property2' => 'public'], $child->toArray());
 
 		$this->expectException(ModelException::class);
+		$this->expectException(NotExistsException::class);
 		$child = new ModelChild2();
 		$child->setModelProperties(['Unknown' => 'new_world']);
 	}
@@ -105,6 +108,7 @@ class ModelTest extends TestCase
 		$this->assertEquals(['test_enum' => 1], $child->toArray());
 
 		$this->expectException(ModelException::class);
+		$this->expectException(TypeException::class);
 		$child->setModelProperties(['test_enum' => 5]);
 	}
 

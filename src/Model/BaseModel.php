@@ -88,7 +88,7 @@ abstract class BaseModel implements BaseModelInterface
 			}
 			catch (ReflectionException $e)
 			{
-				throw new ModelException('Property: '.$column.' has a problem and caused a reflection exception.', $e);
+				throw new NotExistsException('Property '.$column.' does not exist.', $e);
 			}
 
 			if ($property->isPrivate())
@@ -112,7 +112,7 @@ abstract class BaseModel implements BaseModelInterface
 			}
 			catch (TypeError $e)
 			{
-				throw new ModelException('Property: '.$property->getName().' failed to set because of invalid type: '.$prop_type, $e);
+				throw new TypeException('Property: '.$property->getName().' failed to set because of invalid type: '.$prop_type, $e);
 			}
 		}
 	}
